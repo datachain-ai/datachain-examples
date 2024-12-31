@@ -215,7 +215,7 @@ In the image below we can see an example comparison of two different versions of
 
 In the SaaS version of DataChain we also provide lineage tracking for datasets, more robust dataset versioning and auditability, a managed on-demand compute including with GPU clusters to really scale up your workloads and a graphical user interface among other features.
 
-DataChain SaaS is currently available as a private preview in our [DVC Studio](https://studio.dvc.ai/auth/sign-up) platform right now, feel free to ask us about that at `support@iterative.ai`!
+DataChain SaaS is currently available as a private preview in our [DVC Studio](https://studio.datachain.ai/auth/sign-up) platform right now, feel free to ask us about that at `support@iterative.ai`!
 
 ## Summary
 
