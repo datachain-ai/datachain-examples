@@ -1,4 +1,4 @@
 datachain[video]
 opencv-python
 ultralytics
-jupyter
+datachain
