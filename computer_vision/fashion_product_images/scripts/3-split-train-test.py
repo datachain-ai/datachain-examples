@@ -1,4 +1,5 @@
-from datachain import C, DataChain
+import datachain as dc
+from datachain import C
 
 # Define train_test_split function
 
@@ -14,7 +15,7 @@ def train_test_split(path) -> str:
 
 print("\n# Add a signal (split):")
 ds = (
-    DataChain.from_dataset("fashion-product-images")
+    dc.read_dataset("fashion-product-images")
     .filter((C("masterCategory") == "Apparel") & (C("subCategory") == "Topwear"))
     .map(split=train_test_split, params=["file.path"], output=str)
     .save()

@@ -50,7 +50,8 @@ import os
 from collections.abc import Iterator
 from dotenv import load_dotenv
 
-from datachain import DataChain, C, File, DataModel
+import datachain as dc
+from datachain import C, File, DataModel
 
 from unstructured.partition.api import partition_via_api
 from unstructured.cleaners.core import clean
@@ -105,7 +106,7 @@ def process_pdf(file: File) -> Iterator[Chunk]:
         )
 
 dc = (
-    DataChain.from_storage("gs://datachain-demo/neurips")
+    dc.read_storage("gs://datachain-demo/neurips")
     .settings(parallel=-1)
     .filter(C.file.path.glob("*/1987/*.pdf"))
     .gen(document=process_pdf)
@@ -113,7 +114,7 @@ dc = (
 
 dc.save("embedded-documents")
 
-DataChain.from_dataset("embedded-documents").show()
+dc.read_dataset("embedded-documents").show()
 ```
 The resulting dataset will look like in the image below:
 
@@ -127,7 +128,7 @@ The following few lines of code are all that we need to load and select the righ
 
 ```python
 dc = (
-    DataChain.from_storage("gs://datachain-demo/neurips")
+    dc.read_storage("gs://datachain-demo/neurips")
     .settings(parallel=-1)
     .filter(C.file.path.glob("*/1987/*.pdf"))
     .gen(document=process_pdf)
@@ -151,7 +152,7 @@ dc.save("embedded-documents")
 This will persist the table and version it (each time we call this command a new version is created automatically). We can then load and display it by the following command, optionally specifying the dataset version (more on that later).
 
 ```python
-DataChain.from_dataset("embeddings").show()
+dc.read_dataset("embeddings").show()
 ```
 
 All that's missing is the DataChain UDF definition, so let's see how we do that.
@@ -205,7 +206,7 @@ Finally, we want the UDF to produce new rows in our DataChain table and so we ha
 Now, we have a versioned dataset with a new version automatically created by DataChain whenever we run the script above. By default, versions are numbered and we can always recall a particular version by specifying it as in this call:
 
 ```python
-DataChain.from_dataset("embedded-documents", version=<version number>).show()
+dc.read_dataset("embedded-documents", version=<version number>).show()
 ```
 In the image below we can see an example comparison of two different versions of our dataset. We used slightly different data processing methods each time, resulting in different chunks as seen in the `text` column:
 

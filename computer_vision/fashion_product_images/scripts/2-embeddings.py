@@ -2,7 +2,7 @@ import torch
 from torchvision import transforms
 from torchvision.models import resnet50
 
-from datachain import DataChain
+import datachain as dc
 from datachain.lib.image import convert_image
 
 # Model & Transform methods
@@ -28,7 +28,7 @@ def embeddings_processor(file) -> list[float]:
 
 print("\n# Compute and Save Embeddings:")
 dc_emb = (
-    DataChain(name="fashion-tmp")  # from 2-basic-operations.py
+    dc.read_dataset("fashion-tmp")  # from 2-basic-operations.py
     .limit(1000)
     .map(embeddings=embeddings_processor)
     .save("fashion-embeddings")

@@ -96,7 +96,7 @@ def fetch_frame_ids(dc_pose) -> list[str]:
     Returns:
         list[str]: list of frame IDs.
     """
-    return list(dc_pose.distinct('frame.frame_id').collect('frame.frame_id'))
+    return list(dc_pose.distinct('frame.frame').collect('frame.frame'))
 
 
 def process_frame2results(frame_file, pose_detections: list, orig_shape: tuple) -> Results:

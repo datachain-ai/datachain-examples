@@ -36,7 +36,8 @@ Here you can have a look at the full code used in our example which you can run 
 ```python
 from collections.abc import Iterator
 
-from datachain import DataChain, C, File, DataModel
+import datachain as dc
+from datachain import C, File, DataModel
 
 from unstructured.partition.pdf import partition_pdf
 
@@ -82,7 +83,7 @@ def process_pdf(file: File) -> Iterator[Chunk]:
         )
 
 dc = (
-    DataChain.from_storage("gs://datachain-demo/neurips")
+    dc.read_storage("gs://datachain-demo/neurips")
     .settings(parallel=-1)
     .filter(C.file.path.glob("*.pdf"))
     .gen(document=process_pdf)
@@ -90,7 +91,7 @@ dc = (
 
 dc.save("embedded-documents")
 
-DataChain.from_dataset("embedded-documents").show()
+dc.read_dataset("embedded-documents").show()
 ```
 The resulting dataset will look like this:
 
@@ -104,7 +105,7 @@ The following few lines of code are all that we need to load and select the righ
 
 ```python
 dc = (
-    DataChain.from_storage("gs://datachain-demo/neurips")
+    dc.read_storage("gs://datachain-demo/neurips")
     .settings(parallel=-1)
     .filter(C.file.path.glob("*.pdf"))
     .gen(document=process_pdf)
@@ -128,7 +129,7 @@ dc.save("embedded-documents")
 This will persist the table and version it (each time we call this command a new version is created automatically). We can then load and display it by the following command, optionally specifying the dataset version
 
 ```python
-DataChain.from_dataset("embeddings", version=1).show()
+dc.read_dataset("embeddings", version=1).show()
 ```
 
 All that's missing is the DataChain UDF definition, so let's see how we do that.
@@ -172,7 +173,7 @@ Finally, we want the UDF to produce new rows in our DataChain table and so we ha
 Now, we have a versioned dataset with a new version automatically created by DataChain whenever we run the script above. By default, versions are numbered and we can always recall a particular version by specifying it as in this call:
 
 ```python
-DataChain.from_dataset("embedded-documents", version=<version number>).show()
+dc.read_dataset("embedded-documents", version=<version number>).show()
 
 ```
 

@@ -2,7 +2,8 @@ import os
 from collections.abc import Iterator
 from dotenv import load_dotenv
 
-from datachain import DataChain, C, File, DataModel
+import datachain as dc
+from datachain import C, File, DataModel
 
 from unstructured.partition.api import partition_via_api
 from unstructured.cleaners.core import clean
@@ -65,13 +66,13 @@ def process_pdf(file: File) -> Iterator[Chunk]:
         )
 
 
-dc = (
-    DataChain.from_storage("gs://datachain-demo/neurips")
+chain = (
+    dc.read_storage("gs://datachain-demo/neurips")
     .settings(parallel=-1)
     .filter(C.file.path.glob("*/1987/*.pdf"))
     .gen(document=process_pdf)
 )
 
-dc.save("embedded-documents")
+chain.save("embedded-documents")
 
-DataChain.from_dataset("embedded-documents").show()
+dc.read_dataset("embedded-documents").show()

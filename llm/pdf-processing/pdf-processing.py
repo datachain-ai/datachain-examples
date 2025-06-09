@@ -1,6 +1,7 @@
 from collections.abc import Iterator
 
-from datachain import DataChain, C, File, DataModel
+import datachain as dc
+from datachain import C, File, DataModel
 
 from unstructured.partition.pdf import partition_pdf
 
@@ -52,13 +53,13 @@ def process_pdf(file: File) -> Iterator[Chunk]:
             embeddings=chunk.embeddings,
         )
 
-dc = (
-    DataChain.from_storage(source)
+chain = (
+    dc.read_storage(source)
     .settings(parallel=-1)
     .filter(C.file.path.glob("*.pdf"))
     .gen(document=process_pdf)
 )
 
-dc.save("embedded-documents")
+chain.save("embedded-documents")
 
-DataChain.from_dataset("embedded-documents").show()
+dc.read_dataset("embedded-documents").show()

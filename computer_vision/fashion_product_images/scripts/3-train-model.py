@@ -1,6 +1,6 @@
 from torch.utils.data import DataLoader
 
-from datachain import DataChain
+import datachain as dc
 from datachain.lib.pytorch import label_to_int
 from src.train import train_model, transform
 
@@ -27,7 +27,7 @@ def add_target_label(usage) -> str:
 
 
 ds = (
-    DataChain(name="fashion-train")
+    dc.read_dataset("fashion-train")
     .map(target=add_target_label, params=["usage"], output=str)
     .map(label=lambda target: label_to_int(target, CLASSES), output=int)
     .limit(1000)  # Take a sample for the DEMO purposes

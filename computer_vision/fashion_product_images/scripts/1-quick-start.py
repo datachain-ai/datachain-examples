@@ -9,7 +9,8 @@ Before you begin, ensure you have
     - `data/styles.csv`
 """
 
-from datachain import C, DataChain
+import datachain as dc
+from datachain import C
 from datachain.sql.functions import path
 
 # Define the paths
@@ -17,13 +18,13 @@ DATA_PATH = "gs://datachain-demo/fashion-product-images"
 ANNOTATIONS_PATH = "gs://datachain-demo/fashion-product-images/styles_clean.csv"
 
 print("\n# Create a Dataset")
-dc = DataChain.from_storage(DATA_PATH, type="image", anon=True).filter(
+dc = dc.read_storage(DATA_PATH, type="image", anon=True).filter(
     C("file.path").glob("*.jpg")
 )
 dc.show(3)
 
 print("\n# Create a metadata DataChain")
-dc_meta = DataChain.from_csv(ANNOTATIONS_PATH).select_except("source").save()
+dc_meta = dc.read_csv(ANNOTATIONS_PATH).select_except("source").save()
 dc_meta.show(3)
 
 print("\n# Merge the original image and metadata datachains")
@@ -34,7 +35,7 @@ dc_annotated.save("fashion-product-images")
 
 
 print("\n# Filtering Data")
-dc = DataChain.from_dataset(name="fashion-product-images").filter(
+dc = dc.read_dataset(name="fashion-product-images").filter(
     C("mastercategory") == "Apparel"
     and C("subcategory") == "Topwear"
     and C("season") == "Summer"

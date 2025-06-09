@@ -1,4 +1,3 @@
-datachain
-imageio[ffmpeg]
+datachain[video]
 opencv-python
 ultralytics
