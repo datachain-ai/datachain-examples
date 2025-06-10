@@ -2,11 +2,11 @@ import datachain as dc
 from datachain import C
 
 print("\n# Connect to a dataset:")
-dc = dc.read_dataset("fashion-product-images")  # from 1-quick-start.py
+dc_chain = dc.read_dataset("fashion-product-images")  # from 1-quick-start.py
 
 print("\n# Filtering & Sorting:")
 (
-    dc.select(
+    dc_chain.select(
         "file.path",
         "usage",
         "season",
@@ -20,17 +20,16 @@ print("\n# Filtering & Sorting:")
     )
     .filter(C("usage") == "Casual" and C("season") == "Summer")
     .order_by("year")
-    .group_by("gender")
-    .show()
+    .show(5)
 )
 
 
 print("\n# Add signals (columns) with map() method:")
-dc_len = dc.read_dataset("fashion-product-images").map(
-    prod_name_length=lambda file: len(file.name),
-    output=int,
+dc_len = (
+    dc.read_dataset("fashion-product-images")
+    .settings(prefetch=0)
+    .map(prod_name_length=lambda file: len(file.name), output=int)
 )
-
 dc_len.show(3)
 
 print("\n# Save a dataset (version):")
@@ -38,7 +37,8 @@ dc_len.save("fashion-tmp")
 
 print("\n# Save a new version (with prod_name_length_2 column):")
 (
-    dc.read_dataset("fashion-summer-topwear-apparel")
+    dc.read_dataset("fashion-topwear")
+    .settings(prefetch=0)
     .map(prod_name_length_2=lambda file: len(file.name), output=int)
     .save("fashion-tmp")
 )
