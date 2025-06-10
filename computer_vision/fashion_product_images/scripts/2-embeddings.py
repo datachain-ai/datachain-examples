@@ -5,6 +5,7 @@ from torchvision.models import resnet50
 import datachain as dc
 from datachain.lib.image import convert_image
 
+
 # Model & Transform methods
 model = resnet50(pretrained=True).eval()
 transformer = transforms.Compose(
@@ -30,7 +31,8 @@ print("\n# Compute and Save Embeddings:")
 dc_emb = (
     dc.read_dataset("fashion-tmp")  # from 2-basic-operations.py
     .limit(1000)
+    .settings(parallel=True)
     .map(embeddings=embeddings_processor)
     .save("fashion-embeddings")
 )
-dc_emb.limit(3)
+dc_emb.show(3)
