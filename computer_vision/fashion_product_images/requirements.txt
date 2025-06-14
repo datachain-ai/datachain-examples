@@ -1,9 +1,7 @@
-datachain
+datachain[torch]
 matplotlib 
-numpy==2.2.6
+numpy
 pandas
 seaborn
-torch
-torchvision
-tqdm
 umap-learn
+ipywidgets
