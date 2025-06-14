@@ -1,3 +1,4 @@
 datachain[video]
 opencv-python
 ultralytics
+ipywidgets
