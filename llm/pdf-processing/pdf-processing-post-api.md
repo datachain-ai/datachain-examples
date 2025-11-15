@@ -19,9 +19,9 @@ With unstructured we will:
 * Clean the partitions
 * Create vector embeddings from the partitions
 
-***We will also use [DataChain](https://github.com/iterative/datachain), which is an open-source Python data-frame library which helps ML and AI engineers to build a metadata layer on top of unstructured files. DataChain enables out-of-memory storage and processing with a Pythonic dataframe-like API that combines SQL-type operations with GPU/CPU acceleration and seamless scalability, while also versioning and persisting datasets for reproducibility.***
+***We will also use [DataChain](https://github.com/datachain-ai/datachain), which is an open-source Python data-frame library which helps ML and AI engineers to build a metadata layer on top of unstructured files. DataChain enables out-of-memory storage and processing with a Pythonic dataframe-like API that combines SQL-type operations with GPU/CPU acceleration and seamless scalability, while also versioning and persisting datasets for reproducibility.***
 
-With [DataChain](https://github.com/iterative/datachain), we will:
+With [DataChain](https://github.com/datachain-ai/datachain), we will:
 * Easily search and filter our data container to only load the documents we need
 * Scale up the document processing with unstructured.io to the level of our entire document collection
 * Save the results as versioned datasets in tabular format, ready for processing downstream
@@ -216,7 +216,7 @@ In the image below we can see an example comparison of two different versions of
 
 In the SaaS version of DataChain we also provide lineage tracking for datasets, more robust dataset versioning and auditability, a managed on-demand compute including with GPU clusters to really scale up your workloads and a graphical user interface among other features.
 
-DataChain SaaS is currently available as a private preview in our [DVC Studio](https://studio.datachain.ai/auth/sign-up) platform right now, feel free to ask us about that at `support@iterative.ai`!
+DataChain SaaS is currently available as a private preview in our [DataChain Studio](https://studio.datachain.ai/auth/sign-up) platform right now, feel free to ask us about that at `support@datachain.ai`!
 
 ## Summary
 

@@ -52,8 +52,8 @@ datachain query scripts/1-quick-start.py
 
 We'd love to have you join our growing community of DataChain users and contributors! Here's how you can get involved:
 
-- ⭐ Give us a star on [GitHub](https://github.com/iterative/datachain) to show your support
+- ⭐ Give us a star on [GitHub](https://github.com/datachain-ai/datachain) to show your support
 - 🌐 Visit the [datachain.ai](https://datachain.ai) website to learn more about products and services
-- 🙌 Follow us on [LinkedIn](https://www.linkedin.com/company/dvc-ai/) and [Twitter](https://x.com/DVCorg) for the latest updates and insights
+- 🙌 Follow us on [LinkedIn](https://www.linkedin.com/company/datachain-ai/) and [Twitter](https://x.com/datachain_ai) for the latest updates and insights
 
 Thanks for choosing DataChain, and happy coding! 😄
