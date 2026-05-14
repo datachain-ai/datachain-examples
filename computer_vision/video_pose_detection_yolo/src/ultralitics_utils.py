@@ -111,7 +111,7 @@ def process_frame2results(frame_file, pose_detections: list, orig_shape: tuple) 
     Returns:
         Results: Processed results for plotting.
     """
-    img_file_path = frame_file.get_path()
+    img_file_path = frame_file.get_fs_path()
     img_pil = Image.open(img_file_path)
     rgb_array = np.asarray(img_pil)
     if rgb_array.ndim == 3 and rgb_array.shape[2] == 3:
@@ -123,7 +123,7 @@ def process_frame2results(frame_file, pose_detections: list, orig_shape: tuple) 
 
     return Results(
         bgr_array,
-        path=frame_file.get_path(),
+        path=img_file_path,
         names={0: 'person'},
         boxes=boxes.data,
         keypoints=keypoints.data,
